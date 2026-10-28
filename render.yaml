@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: nexa-chat-gateway
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn gateway:app --host 0.0.0.0 --port $PORT --proxy-headers
+    envVars:
+      - key: NEXA_BRIDGE_SECRET
+        sync: false
+      - key: NEXA_PUBLIC_HOST
+        value: nexachat.devs.li
